@@ -1,0 +1,5 @@
+{
+    "liveshare.allowGuestTaskControl": true,
+    "liveshare.allowGuestDebugControl": true,
+    "python.pythonPath": "/usr/local/bin/python3"
+}

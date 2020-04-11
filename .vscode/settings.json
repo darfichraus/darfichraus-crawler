@@ -1,5 +1,13 @@
 {
     "liveshare.allowGuestTaskControl": true,
     "liveshare.allowGuestDebugControl": true,
-    "python.pythonPath": "/usr/local/bin/python3"
+    "python.pythonPath": "/usr/local/bin/python3",
+    "mongoRunner": {
+        "connections": [
+            {
+                "name": "connection1",
+                "url": "mongodb://localhost:27017/test"
+            }
+        ]
+    }
 }

@@ -50,11 +50,10 @@ class RheinlandP(FeedParser):
                          feed_url="https://www.landtag.rlp.de/de/general-storage/footer/infos-zum-herunterladen/rss-feed/rss-feed-presse/index.rss")
 
 
-
 class MecklenburgVorpommern(FeedParser):
-     def __init__(self):
-         super().__init__(mapper=Mapper(Areal.STATE, "Mecklenburg-Vorpommern", use_system_time=True),
-                          feed_url="https://service.mvnet.de/_php/feedcreator/feeds/feed_Regierungsportal_99.xml")
+    def __init__(self):
+        super().__init__(mapper=Mapper(Areal.STATE, "Mecklenburg-Vorpommern", use_system_time=True),
+                         feed_url="https://service.mvnet.de/_php/feedcreator/feeds/feed_Regierungsportal_99.xml")
 
 
 class Hessen(FeedParser):
@@ -74,6 +73,12 @@ class PressePortalDe(FeedParser):
     def __init__(self):
         super().__init__(mapper=Mapper(Areal.COUNTRY, "Deutschland", content_mapper),
                          feed_url="https://www.presseportal.de/rss/gesundheit-medizin.rss2")
+
+    @staticmethod
+    def custom(restriction: Restriction, feeditem: FeedParserDict) -> Restriction:
+        restriction = content_mapper(restriction, feeditem)
+        restriction.publisher="news aktuell (DPA Tochergesellschaft)"
+        return restriction
 
 
 class Brandenburg(FeedParser):

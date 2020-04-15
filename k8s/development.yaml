@@ -1,0 +1,16 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: crawler
+spec:
+  schedule: "1-59/30 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: crawler
+            image: crimsy/crawler
+          restartPolicy: OnFailure
+          imagePullSecrets:
+            - name: docker-hub-crimsy

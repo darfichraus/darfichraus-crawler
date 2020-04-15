@@ -21,7 +21,7 @@ class FeedParser(ABC):
     def __init__(self, mapper, feed_url):
         self.feed_url = feed_url
         self.mapper = mapper
-        self.dbclient = MongoClient('localhost', 27017)
+        self.dbclient = MongoClient('mongo-0.mongo', 27017)
         self.db = self.dbclient.feeds
         self.collection = self.db[type(self).__name__]
 

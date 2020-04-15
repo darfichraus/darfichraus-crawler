@@ -36,10 +36,10 @@ jobs:
         uses: docker://nickgronow/kubectl
         with:
           config_data: ${{ secrets.KUBE_CONFIG }}
-          args: set image --record job/crawler crawler=${REPO}:${GITHUB_RUN_ID} -n ${NAMESPACE}
+          args: set image --record cronjob/crawler crawler=${REPO}:${GITHUB_RUN_ID} -n ${NAMESPACE}
       - name: verify deployment
         uses: docker://nickgronow/kubectl
         with:
           config_data: ${{ secrets.KUBE_CONFIG }}
-          args: '"rollout status deployment/backend -n ${NAMESPACE}"'
+          args: '"rollout status cronjob/crawler -n ${NAMESPACE}"'
 

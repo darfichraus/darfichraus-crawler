@@ -3,13 +3,13 @@
 
 name: Deploy to Staging
 env:
-  NAMESPACE: development
+  NAMESPACE: production
   REPO: crimsy/crawler
 
 on:
   push:
     branches:
-      - develop
+      - master
 
 jobs:
   docker:

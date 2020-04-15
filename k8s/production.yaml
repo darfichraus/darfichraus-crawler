@@ -2,9 +2,9 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: crawler
-  namespace: development
+  namespace: production
 spec:
-  schedule: "0 */2 * * *"
+  schedule: "1-59/30 * * * *"
   jobTemplate:
     spec:
       template:

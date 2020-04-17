@@ -2,12 +2,14 @@ import locale
 import re
 from abc import ABC
 from html.parser import HTMLParser
+
 import feedparser
 import requests
 from pymongo import MongoClient
 
 
 class FeedParser(ABC):
+    options: object
     ref_fields = ["summary", "title"]
     unique_field = "id"
     key_words = ['Corona', 'Sperre', 'Covid']
@@ -35,7 +37,8 @@ class FeedParser(ABC):
                     return True
         return False
 
-    def parse_feed(self):
+    def parse_feed(self, options: object):
+        self.options = options
         new_feed = []
         if self.dateHandler:
             feedparser.registerDateHandler(self.dateHandler)
@@ -68,11 +71,10 @@ class FeedParser(ABC):
 
     def saveFeedElements(self, feed):
         processed_entries = []
-        headers = {'API-KEY': '6bce1751a010f90b68eb887cae8e2141cce149d5de664412e67cdf150006aa16f2bd0373ce496aa5'}
-        url = 'https://api.dev.crimsy.tech/restrictions'
+        headers = {'API-KEY': self.options.api_key}
         for feedelement in feed:
             json = self.mapper.map_to_restriction(feedelement).to_json()
-            response = requests.post(url, headers=headers,
+            response = requests.post(self.options.url, headers=headers,
                                      json=json)
             if response.status_code == 204:
                 processed_entries.append(feedelement)

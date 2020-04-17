@@ -10,8 +10,15 @@ spec:
       template:
         spec:
           containers:
-          - name: crawler
-            image: crimsy/crawler
+            - name: crawler
+              image: crimsy/crawler:development
+              env:
+                - name: API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: backend-api-key
+                      key: api-key
           restartPolicy: OnFailure
           imagePullSecrets:
             - name: docker-hub-crimsy
+

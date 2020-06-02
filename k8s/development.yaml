@@ -4,7 +4,7 @@ metadata:
   name: crawler
   namespace: development
 spec:
-  schedule: "0 */2 * * *"
+  schedule: "30 2 * * *"
   jobTemplate:
     spec:
       template:
